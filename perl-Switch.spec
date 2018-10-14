@@ -4,25 +4,26 @@
 #
 Name     : perl-Switch
 Version  : 2.17
-Release  : 2
+Release  : 3
 URL      : https://cpan.metacpan.org/authors/id/C/CH/CHORNY/Switch-2.17.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/C/CH/CHORNY/Switch-2.17.tar.gz
 Summary  : 'A switch statement for Perl, do not use if you can use given/when'
 Group    : Development/Tools
 License  : Artistic-1.0-Perl
-Requires: perl-Switch-man
+BuildRequires : buildreq-cpan
 
 %description
 ==============================================================================
 Release of version 2.17 of Switch
 ==============================================================================
 
-%package man
-Summary: man components for the perl-Switch package.
-Group: Default
+%package dev
+Summary: dev components for the perl-Switch package.
+Group: Development
+Provides: perl-Switch-devel = %{version}-%{release}
 
-%description man
-man components for the perl-Switch package.
+%description dev
+dev components for the perl-Switch package.
 
 
 %prep
@@ -51,9 +52,9 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 if test -f Makefile.PL; then
-make pure_install PERL_INSTALL_ROOT=%{buildroot}
+make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
-./Build install --installdirs=site --destdir=%{buildroot}
+./Build install --installdirs=vendor --destdir=%{buildroot}
 fi
 find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
 find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null ';'
@@ -62,8 +63,8 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/Switch.pm
+/usr/lib/perl5/vendor_perl/5.26.1/Switch.pm
 
-%files man
+%files dev
 %defattr(-,root,root,-)
 /usr/share/man/man3/Switch.3
