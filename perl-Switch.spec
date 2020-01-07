@@ -4,12 +4,13 @@
 #
 Name     : perl-Switch
 Version  : 2.17
-Release  : 11
+Release  : 12
 URL      : https://cpan.metacpan.org/authors/id/C/CH/CHORNY/Switch-2.17.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/C/CH/CHORNY/Switch-2.17.tar.gz
 Summary  : 'A switch statement for Perl, do not use if you can use given/when'
 Group    : Development/Tools
 License  : Artistic-1.0-Perl
+Requires: perl-Switch-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 
 %description
@@ -21,19 +22,30 @@ Release of version 2.17 of Switch
 Summary: dev components for the perl-Switch package.
 Group: Development
 Provides: perl-Switch-devel = %{version}-%{release}
+Requires: perl-Switch = %{version}-%{release}
 
 %description dev
 dev components for the perl-Switch package.
 
 
+%package perl
+Summary: perl components for the perl-Switch package.
+Group: Default
+Requires: perl-Switch = %{version}-%{release}
+
+%description perl
+perl components for the perl-Switch package.
+
+
 %prep
 %setup -q -n Switch-2.17
+cd %{_builddir}/Switch-2.17
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -43,7 +55,7 @@ else
 fi
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
@@ -63,8 +75,11 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/Switch.pm
 
 %files dev
 %defattr(-,root,root,-)
 /usr/share/man/man3/Switch.3
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/Switch.pm
