@@ -4,7 +4,7 @@
 #
 Name     : perl-Switch
 Version  : 2.17
-Release  : 12
+Release  : 13
 URL      : https://cpan.metacpan.org/authors/id/C/CH/CHORNY/Switch-2.17.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/C/CH/CHORNY/Switch-2.17.tar.gz
 Summary  : 'A switch statement for Perl, do not use if you can use given/when'
@@ -82,4 +82,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.1/Switch.pm
+/usr/lib/perl5/vendor_perl/5.30.2/Switch.pm
