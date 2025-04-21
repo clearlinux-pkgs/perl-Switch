@@ -7,7 +7,7 @@
 #
 Name     : perl-Switch
 Version  : 2.17
-Release  : 29
+Release  : 30
 URL      : https://cpan.metacpan.org/authors/id/C/CH/CHORNY/Switch-2.17.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/C/CH/CHORNY/Switch-2.17.tar.gz
 Summary  : 'A switch statement for Perl, do not use if you can use given/when'
